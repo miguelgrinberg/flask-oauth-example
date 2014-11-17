@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>OAuth Flask Demo</title>
+    </head>
+    <body>
+        <h1>OAuth Demo</h1>
+        {% for message in get_flashed_messages() %}
+            <p><b>Error</b>: {{ message }}</p>
+        {% endfor %}
+        {% if current_user.is_authenticated() %}
+            <h2>Hi, {{ current_user.nickname }}!</h2>
+            <p><a href="{{ url_for('logout') }}">Logout</a></p>
+        {% else %}
+            <h2>I don't know you!</h2>
+            <p><a href="{{ url_for('oauth_authorize', provider='facebook') }}">Login with Facebook</a></p>
+            <p><a href="{{ url_for('oauth_authorize', provider='twitter') }}">Login with Twitter</a></p>
+        {% endif %}
+    </body>
+</html>

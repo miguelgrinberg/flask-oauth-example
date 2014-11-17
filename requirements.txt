@@ -1,0 +1,11 @@
+Flask==0.10.1
+Flask-Login==0.2.11
+Flask-SQLAlchemy==2.0
+Jinja2==2.7.3
+MarkupSafe==0.23
+SQLAlchemy==0.9.8
+Werkzeug==0.9.6
+argparse==1.2.1
+itsdangerous==0.24
+rauth==0.7.0
+requests==2.4.3
