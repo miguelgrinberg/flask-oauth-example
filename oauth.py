@@ -22,13 +22,13 @@ class OAuthSignIn(object):
                        _external=True)
 
     @classmethod
-    def get_provider(self, provider_name):
-        if self.providers is None:
-            self.providers = {}
-            for provider_class in self.__subclasses__():
+    def get_provider(cls, provider_name):
+        if cls.providers is None:
+            cls.providers = {}
+            for provider_class in cls.__subclasses__():
                 provider = provider_class()
-                self.providers[provider.provider_name] = provider
-        return self.providers[provider_name]
+                cls.providers[provider.provider_name] = provider
+        return cls.providers[provider_name]
 
 
 class FacebookSignIn(OAuthSignIn):
