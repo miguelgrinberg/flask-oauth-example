@@ -9,13 +9,16 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'top secret!'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['OAUTH_CREDENTIALS'] = {
+    # dont forget to register site URL: http://www.qopy.me/Qj5atvdMSMeigE1tNE5aJg
     'facebook': {
-        'id': '470154729788964',
-        'secret': '010cc08bd4f51e34f3f3e684fbdea8a7'
+        'id': '245259309256072',
+        'secret': '695c659f73803dcfda7f6f05119015ee'
     },
+    # create app here https://apps.twitter.com/app/new
+    #  and get keys here http://www.qopy.me/h-5eQXeMQbK6pQgle5yFvg
     'twitter': {
-        'id': '3RzWQclolxWZIMq5LJqzRZPTl',
-        'secret': 'm9TEd58DSEtRrZHpz2EjrV9AhsBRxKMo8m3kuIZj3zLwzwIimt'
+        'id': 'r3lRtmrqG6AjD2AAuqjR2VV1B',
+        'secret': 'qUmFxYCFtLinK1uVVwNLJ16uuEGmDFP4xOjpQ9RhusuXtbL6oq'
     }
 }
 
