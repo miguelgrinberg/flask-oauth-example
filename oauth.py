@@ -1,6 +1,6 @@
 from rauth import OAuth1Service, OAuth2Service
 from flask import current_app, url_for, request, redirect, session
-
+from simplejson import json 
 
 class OAuthSignIn(object):
     providers = None
@@ -56,7 +56,8 @@ class FacebookSignIn(OAuthSignIn):
         oauth_session = self.service.get_auth_session(
             data={'code': request.args['code'],
                   'grant_type': 'authorization_code',
-                  'redirect_uri': self.get_callback_url()}
+                  'redirect_uri': self.get_callback_url()},
+            decoder = json.loads
         )
         me = oauth_session.get('me?fields=id,email').json()
         return (
