@@ -9,3 +9,4 @@ argparse==1.2.1
 itsdangerous==0.24
 rauth==0.7.0
 requests==2.4.3
+simplejson==3.10.0
