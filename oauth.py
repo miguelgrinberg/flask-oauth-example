@@ -12,6 +12,8 @@ class OAuthSignIn(object):
         credentials = current_app.config['OAUTH_CREDENTIALS'][provider_name]
         self.consumer_id = credentials['id']
         self.consumer_secret = credentials['secret']
+        if 'url' in credentials:
+            self.base_url = credentials['url']
 
     def authorize(self):
         pass
@@ -107,3 +109,42 @@ class TwitterSignIn(OAuthSignIn):
         social_id = 'twitter$' + str(me.get('id'))
         username = me.get('screen_name')
         return social_id, username, None   # Twitter does not provide email
+
+class MattermostSignIn(OAuthSignIn):
+    def __init__(self):
+        super(MattermostSignIn, self).__init__('mattermost')
+        self.service = OAuth2Service(
+            name='mattermost',
+            client_id=self.consumer_id,
+            client_secret=self.consumer_secret,
+            authorize_url=f'{self.base_url}/oauth/authorize',
+            access_token_url=f'{self.base_url}/oauth/access_token',
+            base_url=self.base_url
+        )
+
+    def authorize(self):
+        return redirect(self.service.get_authorize_url(
+            response_type='code',
+            redirect_uri=self.get_callback_url())
+        )
+
+    def callback(self):
+        def decode_json(payload):
+            return json.loads(payload.decode('utf-8'))
+
+        if 'code' not in request.args:
+            return None, None, None
+        oauth_session = self.service.get_auth_session(
+            data={'code': request.args['code'],
+                  'grant_type': 'authorization_code',
+                  'redirect_uri': self.get_callback_url()},
+            decoder=decode_json
+        )
+        me = oauth_session.get('api/v4/users/me').json()
+        return (
+            me['id'],
+            me.get('email').split('@')[0],  # Facebook does not provide
+                                            # username, so the email's user
+                                            # is used instead
+            me.get('email')
+        )

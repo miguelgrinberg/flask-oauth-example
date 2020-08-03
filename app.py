@@ -16,6 +16,11 @@ app.config['OAUTH_CREDENTIALS'] = {
     'twitter': {
         'id': '3RzWQclolxWZIMq5LJqzRZPTl',
         'secret': 'm9TEd58DSEtRrZHpz2EjrV9AhsBRxKMo8m3kuIZj3zLwzwIimt'
+    },
+    'mattermost': {
+        'id': 'fxsapi88dtyzznot81n8xbd65z',
+        'secret': 'bg1g1mjkb3z18krcp77y9zz61y',
+        'url' : 'http://localhost:8065'
     }
 }
 
