@@ -4,7 +4,7 @@ from urllib.parse import urlencode
 
 from dotenv import load_dotenv
 from flask import Flask, redirect, url_for, render_template, flash, session, \
-    current_app, request
+    current_app, request, abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user,\
     current_user
